@@ -1,0 +1,18 @@
+# Core data processing and analysis
+pandas>=1.5.0
+numpy>=1.21.0
+scipy>=1.9.0
+
+# AI/ML and API
+openai>=1.0.0
+pydantic>=2.0.0
+
+# Async processing and utilities
+tqdm>=4.64.0
+backoff>=2.2.0
+python-dotenv>=1.0.0
+
+# Optional: For enhanced functionality
+# jupyter>=1.0.0  # If using notebooks for analysis
+# matplotlib>=3.5.0  # For plotting results
+# seaborn>=0.11.0  # For statistical plots 
