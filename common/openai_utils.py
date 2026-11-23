@@ -13,16 +13,21 @@ import os
 
 dotenv.load_dotenv()
 
-azure_client = AsyncAzureOpenAI(
-    azure_endpoint=os.getenv("AZURE_OPENAI_ENDPOINT"),
-    api_key=os.getenv("AZURE_OPENAI_API_KEY"),
-    api_version="2025-01-01-preview",
-)
+# Use Azure OpenAI when AZURE_OPENAI_ENDPOINT is set; otherwise fall back to the
+# standard OpenAI API (OPENAI_API_KEY), as described in the README.
+if os.getenv("AZURE_OPENAI_ENDPOINT"):
+    llm_client = AsyncAzureOpenAI(
+        azure_endpoint=os.getenv("AZURE_OPENAI_ENDPOINT"),
+        api_key=os.getenv("AZURE_OPENAI_API_KEY"),
+        api_version=os.getenv("AZURE_OPENAI_API_VERSION", "2025-01-01-preview"),
+    )
+else:
+    llm_client = AsyncOpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 client_dict: Dict[str, List[openai.AsyncClient]] = {
-    "gpt-4.1": [azure_client],
-    "gpt-4.1-mini": [azure_client],
-    "o4-mini": [azure_client],
+    "gpt-4.1": [llm_client],
+    "gpt-4.1-mini": [llm_client],
+    "o4-mini": [llm_client],
 }
 
 __all__: Sequence[str] = (

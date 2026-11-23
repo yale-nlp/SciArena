@@ -54,9 +54,16 @@ pip install -r requirements.txt
 Create a `.env` file in the project root:
 
 ```bash
-# OpenAI API Configuration
+# Option A: OpenAI API
 # Get API key: https://platform.openai.com/api-keys
 OPENAI_API_KEY=your_openai_api_key_here
+
+# Option B: Azure OpenAI (used instead of Option A when AZURE_OPENAI_ENDPOINT is set).
+# Deployment names must match the model names used by the scripts
+# (gpt-4.1, gpt-4.1-mini, o4-mini).
+# AZURE_OPENAI_ENDPOINT=https://your-resource.openai.azure.com/
+# AZURE_OPENAI_API_KEY=your_azure_openai_api_key_here
+# AZURE_OPENAI_API_VERSION=2025-01-01-preview  # optional
 ```
 
 **Note**: API keys are required for citation analysis and LLM as judge experiments. Preference analysis can use existing `citation_attribution.json` files.
